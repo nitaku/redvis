@@ -32,10 +32,10 @@
 </script>
 
 <main>
+	<Editor bind:code={program} on:run={run}/>
 	<View>
 		<div bind:this={content}></div>
 	</View>
-	<Editor bind:code={program} on:input={run}/>
 </main>
 
 <style>
