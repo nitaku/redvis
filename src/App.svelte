@@ -4,6 +4,7 @@
 	import { Interpreter } from '@alex.garcia/unofficial-observablehq-compiler'
 	import { Runtime, Inspector } from '@observablehq/runtime'
 
+	import Bar from './Bar.svelte'
 	import View from './View.svelte'
 	import Editor from './Editor.svelte'
 
@@ -32,10 +33,13 @@
 </script>
 
 <main>
-	<Editor bind:code={program} on:run={run}/>
-	<View>
-		<div bind:this={content}></div>
-	</View>
+	<Bar/>
+	<div style="display: flex; flex-grow: 1;">
+		<Editor bind:code={program} on:run={run}/>
+		<View>
+			<div bind:this={content}></div>
+		</View>
+	</div>
 </main>
 
 <style>
@@ -46,6 +50,7 @@
 	}
 	main {
 		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
 	}
