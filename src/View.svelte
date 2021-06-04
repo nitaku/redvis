@@ -2,7 +2,7 @@
 </script>
 
 <main>
-	View
+	<slot></slot>
 </main>
 
 <style>

@@ -25,6 +25,8 @@
     "@tsconfig/svelte": "^2.0.0"
   },
   "dependencies": {
+    "@alex.garcia/unofficial-observablehq-compiler": "^0.6.0-alpha.0",
+    "@observablehq/runtime": "^4.12.0",
     "sirv-cli": "^1.0.0"
   }
 }
