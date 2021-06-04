@@ -24,7 +24,7 @@ chart`
 <style>
 	textarea {
 		background: white;
-        width: 400px;
+        min-width: 350px;
         resize: none;
         margin: 0;
         font-family: monospace;
