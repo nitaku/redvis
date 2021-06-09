@@ -9,9 +9,9 @@
 	import Editor from './Editor.svelte'
 
 	let editorCells = [
-        {code: `a = 1`},
-        {code: `b = 2`},
-        {code: `c = a+b`}
+        {id: 1, code: `a = 1`},
+        {id: 2, code: `b = 2`},
+        {id: 3, code: `c = a+b`}
     ]
 	let content
 

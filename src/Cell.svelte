@@ -9,7 +9,7 @@
     import {bracketMatching} from "@codemirror/matchbrackets"
     import {javascript} from "@codemirror/lang-javascript"
     
-    let main
+    let editorWrapper
     let view
 
     const dispatch = createEventDispatcher()
@@ -39,28 +39,34 @@
 
         view = new EditorView({
             state: startState,
-            parent: main
+            parent: editorWrapper
         })
     })
 </script>
 
-<main bind:this={main} on:keyup={handleKeyup}>
+<main on:keyup={handleKeyup}>
     <span class="handle material-icons">drag_indicator</span>
+    <div class="editorWrapper" bind:this={editorWrapper}></div>
 </main>
 
 <style>
     main {
         margin: 4px;
         margin-bottom: 0;
+        display: flex;
+        flex-direction: row;
 	}
     .handle {
-        float: left;
         color: #DDD;
         visibility: hidden;
+    }
+    .editorWrapper {
+        flex-grow: 1;
     }
     main :global(.cm-editor) {
         background: whitesmoke;
         border-left: 2px solid whitesmoke;
+        cursor: text;
     }
     main:hover .handle {
         visibility: visible;
