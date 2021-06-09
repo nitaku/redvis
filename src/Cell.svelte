@@ -49,17 +49,23 @@
 
 <style>
     main {
-		background: whitesmoke;
         min-width: 350px;
         margin: 4px;
         margin-bottom: 0;
 	}
     .handle {
         float: left;
-        color: #BBB;
+        color: #DDD;
         visibility: hidden;
+    }
+    main :global(.cm-editor) {
+        border-left: 2px solid whitesmoke;
+        background: whitesmoke;
     }
     main:hover .handle {
         visibility: visible;
+    }
+    main:hover :global(.cm-editor) {
+        border-left: 2px solid #DDD;
     }
 </style>
