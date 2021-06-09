@@ -44,7 +44,7 @@
 </script>
 
 <main bind:this={main} on:keyup={handleKeyup}>
-
+    <span class="handle material-icons">drag_indicator</span>
 </main>
 
 <style>
@@ -54,4 +54,12 @@
         margin: 4px;
         margin-bottom: 0;
 	}
+    .handle {
+        float: left;
+        color: #BBB;
+        visibility: hidden;
+    }
+    main:hover .handle {
+        visibility: visible;
+    }
 </style>
