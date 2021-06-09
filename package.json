@@ -26,6 +26,10 @@
   },
   "dependencies": {
     "@alex.garcia/unofficial-observablehq-compiler": "^0.6.0-alpha.0",
+    "@codemirror/basic-setup": "^0.18.2",
+    "@codemirror/highlight": "^0.18.4",
+    "@codemirror/lang-javascript": "^0.18.0",
+    "@codemirror/matchbrackets": "^0.18.0",
     "@observablehq/runtime": "^4.12.0",
     "sirv-cli": "^1.0.0"
   }

@@ -38,7 +38,7 @@
 
 <main>
 	<Bar/>
-	<div style="display: flex; flex-grow: 1;">
+	<div style="display: flex; flex-grow: 1; overflow: hidden;">
 		<Editor bind:cells={editorCells} on:run={run}/>
 		<View>
 			<div bind:this={content}></div>

@@ -1,5 +1,16 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { createEventDispatcher } from 'svelte'
+
+    import {EditorState} from "@codemirror/state"
+    import {EditorView, keymap} from "@codemirror/view"
+    import {defaultKeymap} from "@codemirror/commands"
+    import {defaultHighlightStyle} from "@codemirror/highlight"
+    import {bracketMatching} from "@codemirror/matchbrackets"
+    import {javascript} from "@codemirror/lang-javascript"
+    
+    let main
+    let view
 
     const dispatch = createEventDispatcher()
 
@@ -10,19 +21,37 @@
             dispatch('run')
         }
     }
+
+    onMount(async () => {
+        let startState = EditorState.create({
+            doc: code,
+            extensions: [
+                keymap.of(defaultKeymap),
+                defaultHighlightStyle.fallback,
+                javascript(),
+                bracketMatching(),
+                EditorView.updateListener.of(update => {
+                    code = update.state.doc.toString()
+                })
+            ]
+        })
+
+        view = new EditorView({
+            state: startState,
+            parent: main
+        })
+    })
 </script>
 
-<textarea on:keyup={handleKeyup} bind:value={code}></textarea>
+<main bind:this={main} on:keyup={handleKeyup}>
+
+</main>
 
 <style>
-	textarea {
+    main {
 		background: whitesmoke;
         min-width: 350px;
-        resize: none;
         margin: 4px;
         margin-bottom: 0;
-        border: 0;
-        border-radius: 0;
-        font-family: monospace;
 	}
 </style>

@@ -14,5 +14,6 @@
     main {
         display: flex;
         flex-direction: column;
+        overflow-y: scroll;
     }
 </style>
