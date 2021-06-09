@@ -30,6 +30,7 @@
                 defaultHighlightStyle.fallback,
                 javascript(),
                 bracketMatching(),
+                EditorView.lineWrapping,
                 EditorView.updateListener.of(update => {
                     code = update.state.doc.toString()
                 })
@@ -49,7 +50,6 @@
 
 <style>
     main {
-        min-width: 350px;
         margin: 4px;
         margin-bottom: 0;
 	}
@@ -59,8 +59,8 @@
         visibility: hidden;
     }
     main :global(.cm-editor) {
-        border-left: 2px solid whitesmoke;
         background: whitesmoke;
+        border-left: 2px solid whitesmoke;
     }
     main:hover .handle {
         visibility: visible;

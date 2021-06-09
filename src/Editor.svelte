@@ -12,6 +12,7 @@
 
 <style>
     main {
+        width: 350px;
         display: flex;
         flex-direction: column;
         overflow-y: scroll;
