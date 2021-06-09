@@ -8,8 +8,12 @@
 	import View from './View.svelte'
 	import Editor from './Editor.svelte'
 
+	let editorCells = [
+        {code: `a = 1`},
+        {code: `b = 2`},
+        {code: `c = a+b`}
+    ]
 	let content
-	let program
 
 	onMount(async () => {
 		run()
@@ -28,14 +32,14 @@
 			observer
 		})
 
-		interpreter.module(program)
+		interpreter.module(editorCells.map(d => d.code).join('\n'))
 	}
 </script>
 
 <main>
 	<Bar/>
 	<div style="display: flex; flex-grow: 1;">
-		<Editor bind:code={program} on:run={run}/>
+		<Editor bind:cells={editorCells} on:run={run}/>
 		<View>
 			<div bind:this={content}></div>
 		</View>

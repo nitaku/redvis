@@ -1,32 +1,18 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
+    import Cell from './Cell.svelte'
 
-    const dispatch = createEventDispatcher()
-
-    export let code = `a = 1;
-viewof b = html\`<input type=range>\`; 
-c = a + b;
-
-height = 200
-viewof color = html\`<input type=color value=#c6e89a>\`
-import {chart} with {height, color} from '@d3/bar-chart'
-chart`
-
-    function handleKeyup(event) {
-        if (event.ctrlKey && event.code == 'Enter') {
-            dispatch('run')
-        }
-    }
+    export let cells = []
 </script>
 
-<textarea on:keyup={handleKeyup} bind:value={code}></textarea>
+<main>
+    {#each cells as cell}
+        <Cell bind:code={cell.code} on:run/>
+    {/each}
+</main>
 
 <style>
-	textarea {
-		background: white;
-        min-width: 350px;
-        resize: none;
-        margin: 0;
-        font-family: monospace;
-	}
+    main {
+        display: flex;
+        flex-direction: column;
+    }
 </style>
