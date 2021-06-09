@@ -16,10 +16,13 @@
 
 <style>
 	textarea {
-		background: white;
+		background: whitesmoke;
         min-width: 350px;
         resize: none;
-        margin: 0;
+        margin: 4px;
+        margin-bottom: 0;
+        border: 0;
+        border-radius: 0;
         font-family: monospace;
 	}
 </style>
