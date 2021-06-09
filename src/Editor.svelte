@@ -27,4 +27,7 @@
         flex-direction: column;
         overflow-y: scroll;
     }
+    main :last-child {
+        margin-bottom: 18px;
+    }
 </style>
