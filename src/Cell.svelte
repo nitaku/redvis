@@ -8,6 +8,7 @@
     import {defaultHighlightStyle} from "@codemirror/highlight"
     import {bracketMatching} from "@codemirror/matchbrackets"
     import {javascript} from "@codemirror/lang-javascript"
+    import {history, historyKeymap} from "@codemirror/history"
     
     let editorWrapper
     let view
@@ -26,11 +27,15 @@
         let startState = EditorState.create({
             doc: code,
             extensions: [
-                keymap.of(defaultKeymap),
+                keymap.of([
+                    ...defaultKeymap,
+                    ...historyKeymap
+                ]),
                 defaultHighlightStyle.fallback,
                 javascript(),
                 bracketMatching(),
                 EditorView.lineWrapping,
+                history(),
                 EditorView.updateListener.of(update => {
                     code = update.state.doc.toString()
                 })
