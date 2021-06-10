@@ -44,7 +44,7 @@
     })
 </script>
 
-<main on:keyup={handleKeyup}>
+<main class="cell" on:keyup={handleKeyup}>
     <span class="handle material-icons">drag_indicator</span>
     <div class="editorWrapper" bind:this={editorWrapper}></div>
 </main>
@@ -62,8 +62,6 @@
     }
     .editorWrapper {
         flex-grow: 1;
-    }
-    main :global(.cm-editor) {
         background: whitesmoke;
         border-left: 2px solid whitesmoke;
         cursor: text;
@@ -71,7 +69,14 @@
     main:hover .handle {
         visibility: visible;
     }
-    main:hover :global(.cm-editor) {
+    main:hover .editorWrapper {
         border-left: 2px solid #DDD;
     }
+    :global(#dnd-action-dragged-el) .handle {
+        visibility: visible;
+		color: black;
+	}
+    :global(#dnd-action-dragged-el) .editorWrapper {
+        border-left: 2px solid black;
+	}
 </style>
