@@ -55,14 +55,14 @@
         margin-bottom: 0;
         display: flex;
         flex-direction: row;
+        background: whitesmoke;
 	}
     .handle {
-        color: #DDD;
+        color: #CCC;
         visibility: hidden;
     }
     .editorWrapper {
         flex-grow: 1;
-        background: whitesmoke;
         border-left: 2px solid whitesmoke;
         cursor: text;
     }
@@ -70,7 +70,7 @@
         visibility: visible;
     }
     main:hover .editorWrapper {
-        border-left: 2px solid #DDD;
+        border-left: 2px solid #CCC;
     }
     :global(#dnd-action-dragged-el) .handle {
         visibility: visible;
