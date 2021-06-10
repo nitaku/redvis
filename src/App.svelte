@@ -40,9 +40,7 @@
 	<Bar/>
 	<div style="display: flex; flex-grow: 1; overflow: hidden;">
 		<Editor bind:cells={editorCells} on:run={run}/>
-		<View>
-			<div bind:this={content}></div>
-		</View>
+		<View bind:content={content}/>
 	</div>
 </main>
 
