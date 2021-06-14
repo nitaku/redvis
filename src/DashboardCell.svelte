@@ -9,7 +9,7 @@
 	})
 </script>
 
-<main bind:this={self}>
+<main bind:this={self} class:focus={cell.focus}>
 </main>
 
 <style>
@@ -21,5 +21,8 @@
 		border-radius: 4px;
 		flex-grow: 1;
 		flex-basis: 0;
+	}
+	main.focus {
+		box-shadow: 0 0 0 1px black;
 	}
 </style>

@@ -16,12 +16,6 @@
 
     export let cell
 
-    function handleKeyup(event) {
-        if (event.ctrlKey && event.code == 'Enter') {
-            dispatch('run', cell)
-        }
-    }
-
     onMount(async () => {
         let startState = EditorState.create({
             doc: cell.code,
@@ -33,6 +27,11 @@
                 EditorView.lineWrapping,
                 EditorView.updateListener.of(update => {
                     cell.code = update.state.doc.toString()
+                    
+                    // dispatch focus and blur events
+                    if(update.focusChanged) {
+                        cell.focus = update.view.hasFocus
+                    }
                 })
             ]
         })
@@ -42,6 +41,12 @@
             parent: editorWrapper
         })
     })
+
+    function handleKeyup(event) {
+        if (event.ctrlKey && event.code == 'Enter') {
+            dispatch('run', cell)
+        }
+    }
 </script>
 
 <main class="cell" on:keyup={handleKeyup}>
@@ -79,4 +84,7 @@
     :global(#dnd-action-dragged-el) .editorWrapper {
         border-left: 2px solid black;
 	}
+    main :global(.cm-editor.cm-focused) {
+        outline: 1px solid black;
+    }
 </style>

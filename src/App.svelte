@@ -10,9 +10,9 @@
 	import Editor from './Editor.svelte'
 
 	let cells = [
-        {id: 1, code: `a = width`, variables: []},
-        {id: 2, code: `b = 2`, variables: []},
-        {id: 3, code: `c = a+b`, variables: []}
+        {id: 1, code: `a = width`, variables: [], focus: false},
+        {id: 2, code: `b = 2`, variables: [], focus: false},
+        {id: 3, code: `c = a+b`, variables: [], focus: false}
     ]
 	let runtime
 	let main
@@ -46,7 +46,8 @@
 		cells = cells.concat([{
 			id: max(cells, d => d.id)+1,
 			code: '',
-			variables: []
+			variables: [],
+			focus: false
 		}])
 	}
 	function handleAdd() {
