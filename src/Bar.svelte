@@ -3,6 +3,8 @@
 
 <main>
 	R.E.D.Vis
+	<slot>
+	</slot>
 </main>
 
 <style>

@@ -14,17 +14,17 @@
 
     const dispatch = createEventDispatcher()
 
-    export let code = ``
+    export let cell
 
     function handleKeyup(event) {
         if (event.ctrlKey && event.code == 'Enter') {
-            dispatch('run')
+            dispatch('run', cell)
         }
     }
 
     onMount(async () => {
         let startState = EditorState.create({
-            doc: code,
+            doc: cell.code,
             extensions: [
                 keymap.of(defaultKeymap),
                 defaultHighlightStyle.fallback,
@@ -32,7 +32,7 @@
                 bracketMatching(),
                 EditorView.lineWrapping,
                 EditorView.updateListener.of(update => {
-                    code = update.state.doc.toString()
+                    cell.code = update.state.doc.toString()
                 })
             ]
         })

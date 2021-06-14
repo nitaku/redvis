@@ -1,19 +1,19 @@
 <script lang="ts">
-	export let content
+	import { onMount } from 'svelte'
+
+    export let cell
+	let self
+
+	onMount(async () => {
+		cell.dashboardCell = self
+	})
 </script>
 
-<main bind:this={content}>
+<main bind:this={self}>
 </main>
 
 <style>
-	main {
-		background: whitesmoke;
-        flex-grow: 1;
-		display: flex;
-		flex-direction: column;
-		overflow: auto;
-	}
-	main :global(.observablehq) {
+    main {
 		margin: 4px;
 		padding: 4px;
 		background: white;

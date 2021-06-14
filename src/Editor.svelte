@@ -2,7 +2,7 @@
     import {dndzone} from "svelte-dnd-action"
     import {flip} from "svelte/animate"
 
-    import Cell from './Cell.svelte'
+    import EditorCell from './EditorCell.svelte'
 
     export let cells: {id: number; code: string}[] = []
 
@@ -15,7 +15,7 @@
 <main use:dndzone="{{items: cells, flipDurationMs}}" on:consider="{handleSort}" on:finalize="{handleSort}">
     {#each cells as cell(cell.id)}
         <div animate:flip="{{duration:flipDurationMs}}">
-            <Cell bind:code={cell.code} on:run/>
+            <EditorCell bind:cell={cell} on:run/>
         </div>
     {/each}
 </main>
