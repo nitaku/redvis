@@ -16,6 +16,7 @@
     ]
 	let runtime
 	let main
+	let editorVisible = true
 
 	onMount(async () => {
 		runtime = new Runtime()
@@ -53,14 +54,18 @@
 	function handleAdd() {
 		newCell()
 	}
+	function handleHide() {
+		editorVisible = !editorVisible
+	}
 </script>
 
 <main>
 	<Bar>
-		<button on:click={handleAdd}>+</button>
+		<button on:click={handleAdd} class="material-icons">add</button>
+		<button on:click={handleHide} class="material-icons">code</button>
 	</Bar>
 	<div style="display: flex; flex-grow: 1; overflow: hidden;">
-		<Editor bind:cells={cells} on:run={handleRun}/>
+		<Editor bind:cells={cells} on:run={handleRun} visible={editorVisible}/>
 		<Dashboard bind:cells={cells}/>
 	</div>
 </main>
@@ -73,7 +78,7 @@
 	}
 	main {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		width: 100%;
 		height: 100%;
 	}
