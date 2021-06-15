@@ -28,9 +28,13 @@
                 EditorView.updateListener.of(update => {
                     cell.code = update.state.doc.toString()
                     
-                    // dispatch focus and blur events
+                    // handle focus and blur events
                     if(update.focusChanged) {
                         cell.focus = update.view.hasFocus
+                        if(!cell.focus) {
+                            // run cell on blur
+                            run()
+                        }
                     }
                 })
             ]
@@ -44,8 +48,11 @@
 
     function handleKeyup(event) {
         if (event.ctrlKey && event.code == 'Enter') {
-            dispatch('run', cell)
+            run()
         }
+    }
+    function run() {
+        dispatch('run', cell)
     }
 </script>
 
