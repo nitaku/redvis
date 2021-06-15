@@ -10,7 +10,7 @@
 	import Editor from './Editor.svelte'
 
 	let cells = [
-        {id: 1, code: `a = width`, variables: [], focus: false},
+        {id: 1, code: `a = 1`, variables: [], focus: false},
         {id: 2, code: `b = 2`, variables: [], focus: false},
         {id: 3, code: `c = a+b`, variables: [], focus: false}
     ]
@@ -21,6 +21,9 @@
 	onMount(async () => {
 		runtime = new Runtime()
 		main = runtime.module()
+
+		// run the entire program at startup
+		cells.forEach(cell => runCell(cell))
 	})
 
 	function handleRun(e) {
