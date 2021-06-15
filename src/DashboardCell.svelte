@@ -14,13 +14,16 @@
 
 <style>
     main {
-		margin: 4px;
-		padding: 4px;
+		margin: 6px;
+		padding: 6px;
 		background: white;
-		border-bottom: 1px solid #DDD;
-		border-radius: 4px;
+		box-shadow: 0 1px 2px 1px #DDD;
+		border-radius: 6px;
 		flex-grow: 1;
 		flex-basis: 0;
+	}
+	main:not(:last-child) {
+		margin-bottom: 0;
 	}
 	main.focus {
 		box-shadow: 0 0 0 1px black;
