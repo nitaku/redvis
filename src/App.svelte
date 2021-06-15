@@ -42,9 +42,20 @@
 			observer
 		})
 
-		// TODO: width and height injection
+		let cellRect = cell.dashboardCell.getBoundingClientRect()
 
-		cell.variables = await interpreter.cell(cell.code)
+		let code = cell.code
+			.replaceAll(/redvis/g, '('+JSON.stringify({
+				cell: {
+					id: cell.id,
+					size: {
+						width: cellRect.width,
+						height: cellRect.height
+					}
+				}
+			})+')')
+
+		cell.variables = await interpreter.cell(code)
 	}
 	function newCell() {
 		cells = cells.concat([{
