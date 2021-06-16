@@ -70,6 +70,7 @@
     main {
         margin: 4px;
         margin-bottom: 0;
+        border-radius: 6px;
         display: flex;
         flex-direction: row;
         background: whitesmoke;
