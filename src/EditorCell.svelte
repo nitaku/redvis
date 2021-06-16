@@ -15,17 +15,11 @@
 
     const dispatch = createEventDispatcher()
 
-    export let code = ``
-
-    function handleKeyup(event) {
-        if (event.ctrlKey && event.code == 'Enter') {
-            dispatch('run')
-        }
-    }
+    export let cell
 
     onMount(async () => {
         let startState = EditorState.create({
-            doc: code,
+            doc: cell.code,
             extensions: [
                 keymap.of([
                     ...defaultKeymap,
@@ -37,7 +31,16 @@
                 EditorView.lineWrapping,
                 history(),
                 EditorView.updateListener.of(update => {
-                    code = update.state.doc.toString()
+                    cell.code = update.state.doc.toString()
+                    
+                    // handle focus and blur events
+                    if(update.focusChanged) {
+                        cell.focus = update.view.hasFocus
+                        if(!cell.focus) {
+                            // run cell on blur
+                            run()
+                        }
+                    }
                 })
             ]
         })
@@ -47,6 +50,15 @@
             parent: editorWrapper
         })
     })
+
+    function handleKeyup(event) {
+        if (event.ctrlKey && event.code == 'Enter') {
+            run()
+        }
+    }
+    function run() {
+        dispatch('run', cell)
+    }
 </script>
 
 <main class="cell" on:keyup={handleKeyup}>
@@ -84,4 +96,7 @@
     :global(#dnd-action-dragged-el) .editorWrapper {
         border-left: 2px solid black;
 	}
+    main :global(.cm-editor.cm-focused) {
+        outline: 1px solid black;
+    }
 </style>

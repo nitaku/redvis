@@ -1,30 +1,40 @@
 <script lang="ts">
+	import { max } from 'd3-array'
 	import { onMount } from 'svelte'
 
 	import { Interpreter } from '@alex.garcia/unofficial-observablehq-compiler'
 	import { Runtime, Inspector } from '@observablehq/runtime'
 
 	import Bar from './Bar.svelte'
-	import View from './View.svelte'
+	import Dashboard from './Dashboard.svelte'
 	import Editor from './Editor.svelte'
 
-	let editorCells = [
-        {id: 1, code: `a = 1`},
-        {id: 2, code: `b = 2`},
-        {id: 3, code: `c = a+b`}
+	let cells = [
+        {id: 1, code: `a = 1`, variables: [], focus: false},
+        {id: 2, code: `b = 2`, variables: [], focus: false},
+        {id: 3, code: `c = a+b`, variables: [], focus: false}
     ]
-	let content
+	let runtime
+	let main
+	let editorVisible = true
 
 	onMount(async () => {
-		run()
+		runtime = new Runtime()
+		main = runtime.module()
+
+		// run the entire program at startup
+		cells.forEach(cell => runCell(cell))
 	})
 
-	function run() {
-		content.innerHTML = ''
-		
-		const runtime = new Runtime()
-		const main = runtime.module()
-		const observer = Inspector.into(content)
+	function handleRun(e) {
+		runCell(e.detail)
+	}
+	async function runCell(cell) {
+		// delete old variables, if any
+		cell.variables.forEach(v => v.delete())
+
+		cell.dashboardCell.innerHTML = ''
+		const observer = Inspector.into(cell.dashboardCell)
 
 		const interpreter = new Interpreter({
 			observeViewofValues: false,
@@ -32,15 +42,34 @@
 			observer
 		})
 
-		interpreter.module(editorCells.map(d => d.code).join('\n'))
+		// TODO: width and height injection
+
+		cell.variables = await interpreter.cell(cell.code)
+	}
+	function newCell() {
+		cells = cells.concat([{
+			id: max(cells, d => d.id)+1,
+			code: '',
+			variables: [],
+			focus: false
+		}])
+	}
+	function handleAdd() {
+		newCell()
+	}
+	function handleHide() {
+		editorVisible = !editorVisible
 	}
 </script>
 
 <main>
-	<Bar/>
+	<Bar>
+		<button on:click={handleAdd} class="material-icons">add</button>
+		<button on:click={handleHide} class="material-icons">code</button>
+	</Bar>
 	<div style="display: flex; flex-grow: 1; overflow: hidden;">
-		<Editor bind:cells={editorCells} on:run={run}/>
-		<View bind:content={content}/>
+		<Editor bind:cells={cells} on:run={handleRun} visible={editorVisible}/>
+		<Dashboard bind:cells={cells}/>
 	</div>
 </main>
 
@@ -52,7 +81,7 @@
 	}
 	main {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		width: 100%;
 		height: 100%;
 	}

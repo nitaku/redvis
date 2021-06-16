@@ -2,9 +2,10 @@
     import {dndzone} from "svelte-dnd-action"
     import {flip} from "svelte/animate"
 
-    import Cell from './Cell.svelte'
+    import EditorCell from './EditorCell.svelte'
 
     export let cells: {id: number; code: string}[] = []
+    export let visible
 
     const flipDurationMs = 200
     function handleSort(e: CustomEvent<DndEvent>) {
@@ -12,16 +13,16 @@
     }
 </script>
 
-<main use:dndzone="{{items: cells, flipDurationMs}}" on:consider="{handleSort}" on:finalize="{handleSort}">
+<main use:dndzone="{{items: cells, flipDurationMs}}" on:consider="{handleSort}" on:finalize="{handleSort}" class:visible>
     {#each cells as cell(cell.id)}
         <div animate:flip="{{duration:flipDurationMs}}">
-            <Cell bind:code={cell.code} on:run/>
+            <EditorCell bind:cell={cell} on:run/>
         </div>
     {/each}
 </main>
 
 <style>
-    main {
+    main.visible {
         width: 350px;
         min-width: 350px;
         display: flex;
@@ -31,5 +32,8 @@
     }
     main :last-child {
         margin-bottom: 18px;
+    }
+    main:not(.visible) {
+        display: none;
     }
 </style>

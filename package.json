@@ -33,6 +33,7 @@
     "@codemirror/lang-javascript": "^0.18.0",
     "@codemirror/matchbrackets": "^0.18.0",
     "@observablehq/runtime": "^4.12.0",
+    "d3-array": "^3.0.1",
     "sirv-cli": "^1.0.0"
   }
 }
