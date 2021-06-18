@@ -12,9 +12,16 @@
 <style>
 	main {
 		background: #f9fbfcff;
-        flex-grow: 1;
-		display: flex;
-		flex-direction: column;
 		overflow: auto;
-	}
+		flex-grow: 1;
+		display: grid;
+		padding: 3px;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 2fr 1fr;
+		gap: 0px 0px;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"_1 _1"
+			"_2 _3";
+		}
 </style>
