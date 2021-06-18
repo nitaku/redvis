@@ -10,7 +10,7 @@
 
 <style>
 	main {
-		background: whitesmoke;
+		background: #c6d2d7;
 	}
 	main > :global(*) {
 		display: block;

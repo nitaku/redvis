@@ -29,6 +29,9 @@
         flex-direction: column;
         overflow-y: scroll;
         overflow-x: hidden;
+        background: #c6d2d7;
+        box-shadow: 0px 0px 6px black;
+        z-index: 10;
     }
     main :last-child {
         margin-bottom: 18px;
