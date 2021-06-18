@@ -15,13 +15,13 @@
 		overflow: auto;
 		flex-grow: 1;
 		display: grid;
-		padding: 3px;
 		grid-template-columns: 1fr 1fr;
 		grid-template-rows: 2fr 1fr;
-		gap: 0px 0px;
+		padding: 6px;
+		gap: 6px 6px;
 		grid-auto-flow: row;
 		grid-template-areas:
-			"_1 _1"
-			"_2 _3";
+			"_1 _2"
+			"_3 _3";
 		}
 </style>
