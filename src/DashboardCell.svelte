@@ -1,15 +1,36 @@
 <script lang="ts">
+	import { ResizeSensor } from 'css-element-queries'
+
 	import { onMount } from 'svelte'
+	import { createEventDispatcher } from 'svelte'
 
     export let cell
 	let self
+	let content
+
+	const dispatch = createEventDispatcher()
 
 	onMount(async () => {
 		cell.dashboardCell = self
+		cell.content = content
+
+		// wait an animation frame to let ElementQueries do its thing
+		await new Promise(r => requestAnimationFrame(r))
+
+		// listen to element resizing
+		new ResizeSensor(self, () => {
+			// re-run the cell on resize
+			run()
+		})
 	})
+
+	function run() {
+        dispatch('run', cell)
+    }
 </script>
 
 <main bind:this={self} class:focus={cell.focus}>
+	<div class="content" bind:this={content}></div>
 </main>
 
 <style>

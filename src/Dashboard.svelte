@@ -5,7 +5,7 @@
 
 <main>
 	{#each cells as cell(cell.id)}
-		<DashboardCell cell={cell}/>
+		<DashboardCell cell={cell} on:run/>
 	{/each}
 </main>
 

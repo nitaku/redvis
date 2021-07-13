@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { ElementQueries } from 'css-element-queries'
+
 	import { max } from 'd3-array'
 	import { onMount } from 'svelte'
 
@@ -17,8 +19,11 @@
 	let runtime
 	let main
 	let editorVisible = true
-
+	
 	onMount(async () => {
+		// enable resize event listening
+		ElementQueries.listen()
+
 		runtime = new Runtime()
 		main = runtime.module()
 
@@ -33,8 +38,8 @@
 		// delete old variables, if any
 		cell.variables.forEach(v => v.delete())
 
-		cell.dashboardCell.innerHTML = ''
-		const observer = Inspector.into(cell.dashboardCell)
+		cell.content.innerHTML = ''
+		const observer = Inspector.into(cell.content)
 
 		const interpreter = new Interpreter({
 			observeViewofValues: false,
@@ -80,7 +85,7 @@
 	</Bar>
 	<div style="display: flex; flex-grow: 1; overflow: hidden;">
 		<Editor bind:cells={cells} on:run={handleRun} visible={editorVisible}/>
-		<Dashboard bind:cells={cells}/>
+		<Dashboard bind:cells={cells} on:run={handleRun}/>
 	</div>
 </main>
 
