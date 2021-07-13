@@ -70,7 +70,7 @@
     main {
         margin: 8px;
         margin-bottom: 0;
-        border-radius: 8px;
+        border-radius: 4px;
         display: flex;
         flex-direction: row;
         background: #ebf0f3;

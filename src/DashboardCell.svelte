@@ -46,7 +46,7 @@
 		padding: 6px;
 		background: white;
 		box-shadow: 0 1px 2px 1px #DDD;
-		border-radius: 6px;
+		border-radius: 4px;
 		flex-grow: 1;
 		flex-basis: 0;
 		overflow: auto;
