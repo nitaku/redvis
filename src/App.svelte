@@ -47,16 +47,11 @@
 			observer
 		})
 
-		let cellRect = cell.dashboardCell.getBoundingClientRect()
-
 		let code = cell.code
 			.replaceAll(/redvis/g, '('+JSON.stringify({
 				cell: {
 					id: cell.id,
-					size: {
-						width: cellRect.width,
-						height: cellRect.height
-					}
+					size: getInnerSize(cell.dashboardCell)
 				}
 			})+')')
 
@@ -75,6 +70,17 @@
 	}
 	function handleHide() {
 		editorVisible = !editorVisible
+	}
+
+	function getInnerSize( element ){
+		let computed = getComputedStyle(element)
+		let paddingWidth = parseFloat(computed.paddingLeft) + parseFloat(computed.paddingRight)
+		let paddingHeight = parseFloat(computed.paddingTop) + parseFloat(computed.paddingBottom)
+		
+		return {
+			width: element.clientWidth-paddingWidth,
+			height: element.clientHeight-paddingHeight
+		}
 	}
 </script>
 
