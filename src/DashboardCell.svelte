@@ -18,7 +18,15 @@
 		await new Promise(r => requestAnimationFrame(r))
 
 		// listen to element resizing
+		let lastClientRect
 		new ResizeSensor(self, () => {
+			const clientRect = self.getBoundingClientRect()
+			
+			// skip resizing if the element has not changed size
+			if (lastClientRect !== undefined && clientRect.width === lastClientRect.width && clientRect.height === lastClientRect.height) return
+
+			lastClientRect = clientRect
+
 			// re-run the cell on resize
 			run()
 		})
